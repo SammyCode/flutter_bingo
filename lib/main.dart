@@ -1,44 +1,60 @@
+// ignore_for_file: library_private_types_in_public_api
+
 import 'dart:math';
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(BingoApp());
+  runApp(const BingoApp());
 }
 
 class BingoApp extends StatelessWidget {
+  const BingoApp({super.key});
+
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const MaterialApp(
       home: BingoScreen(),
     );
   }
 }
 
 class BingoScreen extends StatefulWidget {
+  const BingoScreen({super.key});
+
   @override
   _BingoScreenState createState() => _BingoScreenState();
 }
 
 class _BingoScreenState extends State<BingoScreen> {
   final List<String> images = [
-    'https://via.placeholder.com/100/FF0000/FFFFFF?text=1',
-    'https://via.placeholder.com/100/00FF00/FFFFFF?text=2',
-    'https://via.placeholder.com/100/0000FF/FFFFFF?text=3',
-    'https://via.placeholder.com/100/FFFF00/FFFFFF?text=4',
-    'https://via.placeholder.com/100/FF00FF/FFFFFF?text=5',
-    'https://via.placeholder.com/100/00FFFF/FFFFFF?text=6',
-    'https://via.placeholder.com/100/FFFFFF/000000?text=7',
-    'https://via.placeholder.com/100/000000/FFFFFF?text=8',
-    'https://via.placeholder.com/100/FFA500/FFFFFF?text=9',
-    'https://via.placeholder.com/100/FF0000/FFFFFF?text=10',
-    'https://via.placeholder.com/100/00FF00/FFFFFF?text=11',
-    'https://via.placeholder.com/100/0000FF/FFFFFF?text=12',
-    'https://via.placeholder.com/100/FFFF00/FFFFFF?text=13',
-    'https://via.placeholder.com/100/FF00FF/FFFFFF?text=14',
-    'https://via.placeholder.com/100/00FFFF/FFFFFF?text=15',
-    'https://via.placeholder.com/100/FFFFFF/000000?text=16',
-    'https://via.placeholder.com/100/000000/FFFFFF?text=17',
-    'https://via.placeholder.com/100/FFA500/FFFFFF?text=18',
+    'assets/images/bottom-app-bar.png',
+    'assets/images/bottom-navigation-bar.png',
+    'assets/images/bottom-sheet.png',
+    'assets/images/card.png',
+    'assets/images/carousel.png',
+    'assets/images/checkbox.png',
+    'assets/images/cupertino-action-sheet.png',
+    'assets/images/CupertinoDatePicker.png',
+    'assets/images/data-table.png',
+    'assets/images/date-picker.png',
+    'assets/images/dialog.png',
+    'assets/images/floatin-action-button.png',
+    'assets/images/grid-view.png',
+    'assets/images/icon-button.png',
+    'assets/images/icon.png',
+    'assets/images/list-tile.png',
+    'assets/images/list.png',
+    'assets/images/navigation-bar.png',
+    'assets/images/popup-menu-button.png',
+    'assets/images/progress-indicator.png',
+    'assets/images/radio-button.png',
+    'assets/images/segmented-button.png',
+    'assets/images/snackbar.png',
+    'assets/images/switch.png',
+    'assets/images/tab-bar.png',
+    'assets/images/text-field.png',
+    'assets/images/time-picker.png',
+    'assets/images/top-app-bar.png',
   ];
 
   List<String> shuffledImages = [];
@@ -54,7 +70,7 @@ class _BingoScreenState extends State<BingoScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Flutter Bingo'),
+        title: const Text('Flutter Bingo'),
         centerTitle: true,
       ),
       body: Padding(
@@ -62,8 +78,8 @@ class _BingoScreenState extends State<BingoScreen> {
         child: GridView.builder(
           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: gridSize,
-            crossAxisSpacing: 8.0,
-            mainAxisSpacing: 8.0,
+            crossAxisSpacing: 20.0,
+            mainAxisSpacing: 20.0,
           ),
           itemCount: gridSize * gridSize,
           itemBuilder: (context, index) {
@@ -79,10 +95,13 @@ class _BingoScreenState extends State<BingoScreen> {
                   borderRadius: BorderRadius.circular(8.0),
                 ),
                 child: shuffledImages[index].isNotEmpty
-                    ? Text(shuffledImages[index])
+                    ? Image.asset(
+                        shuffledImages[index],
+                        fit: BoxFit.cover,
+                      )
                     : Container(
                         color: Colors.grey.shade300,
-                        child: Center(
+                        child: const Center(
                           child: Text(
                             'X',
                             style: TextStyle(
@@ -103,8 +122,8 @@ class _BingoScreenState extends State<BingoScreen> {
             shuffledImages = List.from(images)..shuffle(Random());
           });
         },
-        child: Icon(Icons.refresh),
         tooltip: 'Shuffle Images',
+        child: const Icon(Icons.refresh),
       ),
     );
   }
