@@ -66,6 +66,39 @@ class _BingoScreenState extends State<BingoScreen> {
     shuffledImages = List.from(images)..shuffle(Random());
   }
 
+  void _showConfirmationDialog() {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(12.0),
+          ),
+          title: const Text('Nuevo Tablero'),
+          content: const Text(
+              '¿Estás seguro de que quieres generar un nuevo tablero?'),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop(); // Cierra el cuadro de diálogo
+              },
+              child: const Text('Cancelar'),
+            ),
+            TextButton(
+              onPressed: () {
+                setState(() {
+                  shuffledImages = List.from(images)..shuffle(Random());
+                });
+                Navigator.of(context).pop(); // Cierra el cuadro de diálogo
+              },
+              child: const Text('Sí, nuevo tablero'),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -117,13 +150,9 @@ class _BingoScreenState extends State<BingoScreen> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          setState(() {
-            shuffledImages = List.from(images)..shuffle(Random());
-          });
-        },
+        onPressed: _showConfirmationDialog,
+        child: Icon(Icons.refresh),
         tooltip: 'Shuffle Images',
-        child: const Icon(Icons.refresh),
       ),
     );
   }
