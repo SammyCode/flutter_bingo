@@ -38,7 +38,7 @@ class _BingoScreenState extends State<BingoScreen> {
     'assets/images/data-table.png',
     'assets/images/date-picker.png',
     'assets/images/dialog.png',
-    'assets/images/floatin-action-button.png',
+    'assets/images/floating-action-button.png',
     'assets/images/grid-view.png',
     'assets/images/icon-button.png',
     'assets/images/icon.png',
