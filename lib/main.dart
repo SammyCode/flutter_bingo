@@ -2,6 +2,7 @@
 
 import 'dart:math';
 import 'package:flutter/material.dart';
+import 'package:flutter_bingo/bingo_card.dart';
 
 void main() {
   runApp(const BingoApp());
@@ -13,6 +14,7 @@ class BingoApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const MaterialApp(
+      debugShowCheckedModeBanner: false,
       home: BingoScreen(),
     );
   }
@@ -26,38 +28,56 @@ class BingoScreen extends StatefulWidget {
 }
 
 class _BingoScreenState extends State<BingoScreen> {
-  final List<String> images = [
-    'assets/images/bottom-app-bar.png',
-    'assets/images/bottom-navigation-bar.png',
-    'assets/images/bottom-sheet.png',
-    'assets/images/card.png',
-    'assets/images/carousel.png',
-    'assets/images/checkbox.png',
-    'assets/images/cupertino-action-sheet.png',
-    'assets/images/CupertinoDatePicker.png',
-    'assets/images/data-table.png',
-    'assets/images/date-picker.png',
-    'assets/images/dialog.png',
-    'assets/images/floating-action-button.png',
-    'assets/images/grid-view.png',
-    'assets/images/icon-button.png',
-    'assets/images/icon.png',
-    'assets/images/list-tile.png',
-    'assets/images/list.png',
-    'assets/images/navigation-bar.png',
-    'assets/images/popup-menu-button.png',
-    'assets/images/progress-indicator.png',
-    'assets/images/radio-button.png',
-    'assets/images/segmented-button.png',
-    'assets/images/snackbar.png',
-    'assets/images/switch.png',
-    'assets/images/tab-bar.png',
-    'assets/images/text-field.png',
-    'assets/images/time-picker.png',
-    'assets/images/top-app-bar.png',
+  final List<BingoCard> images = [
+    BingoCard(
+        image: 'assets/images/Android Studio.png',
+        title: 'Android Studio',
+        taped: false),
+    BingoCard(
+        image: 'assets/images/Android.png', title: 'Android', taped: false),
+    BingoCard(
+        image: 'assets/images/Appwrite.png', title: 'Appwrite', taped: false),
+    BingoCard(image: 'assets/images/BLoC.png', title: 'BLoC', taped: false),
+    BingoCard(
+        image: 'assets/images/Codemagic.png', title: 'Codemagic', taped: false),
+    BingoCard(image: 'assets/images/Dart.png', title: 'Dart', taped: false),
+    BingoCard(image: 'assets/images/Figma.png', title: 'Figma', taped: false),
+    BingoCard(
+        image: 'assets/images/Firebase.png', title: 'Firebase', taped: false),
+    BingoCard(
+        image: 'assets/images/Flutter.png', title: 'Flutter', taped: false),
+    BingoCard(
+        image: 'assets/images/Font Awesome.png',
+        title: 'Font Awesome',
+        taped: false),
+    BingoCard(image: 'assets/images/GetX.png', title: 'GetX', taped: false),
+    BingoCard(image: 'assets/images/Git.png', title: 'Git', taped: false),
+    BingoCard(image: 'assets/images/GitHub.png', title: 'GitHub', taped: false),
+    BingoCard(
+        image: 'assets/images/Google Cloud.png',
+        title: 'Google Cloud',
+        taped: false),
+    BingoCard(
+        image: 'assets/images/GraphQL.png', title: 'GraphQL', taped: false),
+    BingoCard(image: 'assets/images/iOS.png', title: 'iOS', taped: false),
+    BingoCard(image: 'assets/images/JSON.png', title: 'JSON', taped: false),
+    BingoCard(image: 'assets/images/Lottie.png', title: 'Lottie', taped: false),
+    BingoCard(
+        image: 'assets/images/Material Desing.png',
+        title: 'Material Desing',
+        taped: false),
+    BingoCard(
+        image: 'assets/images/Riverpod.png', title: 'Riverpod', taped: false),
+    BingoCard(image: 'assets/images/Sentry.png', title: 'Sentry', taped: false),
+    BingoCard(image: 'assets/images/SQL.png', title: 'SQL', taped: false),
+    BingoCard(image: 'assets/images/SQLite', title: 'SQLite', taped: false),
+    BingoCard(
+        image: 'assets/images/VS Code.png', title: 'VS Code', taped: false),
+    BingoCard(
+        image: 'assets/images/WebSocket.png', title: 'WebSocket', taped: false),
   ];
 
-  List<String> shuffledImages = [];
+  List<BingoCard> shuffledImages = [];
   final int gridSize = 3; // 3x3 grid
 
   @override
@@ -102,9 +122,12 @@ class _BingoScreenState extends State<BingoScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.yellow,
       appBar: AppBar(
-        title: const Text('Flutter Bingo'),
+        title: const Text('Flutter Bingo',
+            style: TextStyle(decorationColor: Color.fromARGB(128, 19, 8, 130))),
         centerTitle: true,
+        backgroundColor: Colors.red,
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -119,37 +142,59 @@ class _BingoScreenState extends State<BingoScreen> {
             return GestureDetector(
               onTap: () {
                 setState(() {
-                  shuffledImages[index] = ''; // Clear image when tapped
+                  if (shuffledImages[index].taped) {
+                    shuffledImages[index] =
+                        shuffledImages[index].copyWith(taped: false);
+                  } else {
+                    shuffledImages[index] =
+                        shuffledImages[index].copyWith(taped: true);
+                  }
+                  // Clear image when tapped
                 });
               },
               child: Container(
-                decoration: BoxDecoration(
-                  border: Border.all(color: Colors.black, width: 2.0),
-                  borderRadius: BorderRadius.circular(8.0),
-                ),
-                child: shuffledImages[index].isNotEmpty
-                    ? Image.asset(
-                        shuffledImages[index],
-                        fit: BoxFit.cover,
-                      )
-                    : Container(
-                        color: Colors.grey.shade300,
-                        child: const Center(
-                          child: Text(
-                            'X',
-                            style: TextStyle(
-                              fontSize: 24.0,
-                              fontWeight: FontWeight.bold,
+                  // color: Color(0x0167b0),
+                  decoration: BoxDecoration(
+                    border: Border.all(color: Colors.black, width: 3.0),
+                    borderRadius: BorderRadius.circular(10.0),
+                  ),
+                  child: !shuffledImages[index].taped
+                      ? Stack(
+                          //alignment: Alignment.center,
+                          children: [
+                            Container(
+                              // color: Colors.red,
+                              child: Image.asset(
+                                shuffledImages[index].image,
+                                fit: BoxFit.cover,
+                              ),
                             ),
-                          ),
-                        ),
-                      ),
-              ),
+                            Text(
+                              shuffledImages[index].title,
+                              style: const TextStyle(
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ],
+                        )
+                      : Stack(
+                          children: [
+                            Opacity(
+                              opacity: 0.5,
+                              child: Image.asset(
+                                shuffledImages[index].image,
+                                fit: BoxFit.cover,
+                              ),
+                            ),
+                            Text(shuffledImages[index].title),
+                          ],
+                        )),
             );
           },
         ),
       ),
       floatingActionButton: FloatingActionButton(
+        backgroundColor: Color.fromARGB(179, 1, 103, 176),
         onPressed: _showConfirmationDialog,
         child: Icon(Icons.refresh),
         tooltip: 'Shuffle Images',
