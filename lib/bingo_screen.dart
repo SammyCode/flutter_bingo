@@ -1,5 +1,6 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 import 'package:flutter_bingo/bingo_card.dart';
 import 'package:flutter_bingo/bingo_images.dart';
 
