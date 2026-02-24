@@ -43,4 +43,13 @@ final List<BingoCard> bingoImages = [
   BingoCard(image: 'assets/images/VS Code.png', title: 'VS Code', taped: false),
   BingoCard(
       image: 'assets/images/WebSocket.png', title: 'WebSocket', taped: false),
+  BingoCard(
+      image: 'assets/images/TensorFlow.png', title: 'TensorFlow', taped: false),
+  BingoCard(image: 'assets/images/Gemini.png', title: 'Gemini', taped: false),
+  BingoCard(image: 'assets/images/Copilot.png', title: 'Copilot', taped: false),
+  BingoCard(image: 'assets/images/ChatGPT.png', title: 'ChatGPT', taped: false),
+  BingoCard(
+      image: 'assets/images/Claude Code.png',
+      title: 'Claude Code',
+      taped: false),
 ];
